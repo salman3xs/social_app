@@ -18,7 +18,6 @@ class AddPostForm extends ConsumerWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     // Get the PostNotifierProvider from the dependency injection tree.
     final model = ref.watch(postNotifierProvider);
     // Return a Scaffold widget with the following contents:
@@ -85,6 +84,7 @@ class AddPostForm extends ConsumerWidget {
                           model.addPost(() {
                             AppRoutes.pop();
                             ref.refresh(postFutureProvider);
+                            ref.refresh(postRepository);
                           });
                         },
                         child: const Text('Add Post'),
@@ -105,7 +105,6 @@ class SelectUsersDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     // Get the list of all users from the dependency injection tree.
     final users = ref.watch(allUsersFutureProvider);
 

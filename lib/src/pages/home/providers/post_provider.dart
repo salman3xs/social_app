@@ -47,7 +47,11 @@ class PostNotifer extends ChangeNotifier {
   List<String> mentionedUsers = [];
 
   // Cleans up the post notifier.
-  void clean() {}
+  void clean() {
+    content = '';
+    mentionedUsers = [];
+    file = null;
+  }
 
   // Adds a post.
   void addPost(VoidCallback onDone) async {
