@@ -6,6 +6,8 @@ class ShimmerBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Return a SizedBox widget with a Shimmer widget as its child.
+    // The Shimmer widget will simulate the loading state of a widget.
     return SizedBox(
         height: 200,
         width: double.infinity,

@@ -11,6 +11,7 @@ class UserModal {
   final int phone;
   final List<PostModel> posts;
   final List<String> following;
+  // Constructor
   UserModal({
     required this.name,
     required this.id,
@@ -19,6 +20,7 @@ class UserModal {
     required this.following,
   });
 
+  // Copy constructor
   UserModal copyWith({
     String? name,
     String? id,
@@ -35,6 +37,7 @@ class UserModal {
     );
   }
 
+  // Converts the UserModal object to a map
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
@@ -45,6 +48,7 @@ class UserModal {
     };
   }
 
+  // Creates a UserModal object from a map
   factory UserModal.fromMap(Map<String, dynamic> map) {
     return UserModal(
       name: (map['name'] ?? '') as String,
@@ -60,6 +64,7 @@ class UserModal {
     );
   }
 
+  // Creates a UserModal object from a GraphQL query response
   factory UserModal.fromQuery(String query, Map<String, dynamic> data) {
     final map = data[query];
     return UserModal(
@@ -80,19 +85,24 @@ class UserModal {
     );
   }
 
+  // Converts the UserModal object to JSON
   String toJson() => json.encode(toMap());
 
+  // Creates a UserModal object from JSON
   factory UserModal.fromJson(String source) =>
       UserModal.fromMap(json.decode(source) as Map<String, dynamic>);
 
+  // Creates an empty UserModal object
   factory UserModal.empty() =>
       UserModal(name: '', id: '', phone: 0, following: [], posts: []);
 
+  // Overridden toString() method
   @override
   String toString() {
     return 'UserModal(name: $name, id: $id, phone: $phone, posts: $posts, following: $following)';
   }
 
+  // Overridden equality operator
   @override
   bool operator ==(covariant UserModal other) {
     if (identical(this, other)) return true;
@@ -103,7 +113,7 @@ class UserModal {
         listEquals(other.posts, posts) &&
         listEquals(other.following, following);
   }
-
+  // Overridden hashCode
   @override
   int get hashCode {
     return name.hashCode ^

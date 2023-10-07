@@ -9,6 +9,7 @@ class PostModel {
   final String img;
   final String content;
   final List<String> mentionedUsers;
+  // Constructor
   PostModel({
     required this.id,
     required this.author,
@@ -17,6 +18,7 @@ class PostModel {
     required this.mentionedUsers,
   });
 
+  // Copy constructor
   PostModel copyWith({
     String? id,
     String? author,
@@ -33,6 +35,7 @@ class PostModel {
     );
   }
 
+  // Converts the PostModel object to a map
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
@@ -43,6 +46,7 @@ class PostModel {
     };
   }
 
+  // Creates a PostModel object from a map
   factory PostModel.fromMap(Map<String, dynamic> map) {
     return PostModel(
       id: (map['id'] ?? '') as String,
@@ -53,16 +57,20 @@ class PostModel {
     );
   }
 
+  // Converts the PostModel object to JSON
   String toJson() => json.encode(toMap());
 
+  // Creates a PostModel object from JSON
   factory PostModel.fromJson(String source) =>
       PostModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
+  // Overridden toString() method
   @override
   String toString() {
     return 'PostModel(id: $id, author: $author, img: $img, content: $content, mentionedUsers: $mentionedUsers)';
   }
 
+  // Overridden equality operator
   @override
   bool operator ==(covariant PostModel other) {
     if (identical(this, other)) return true;
@@ -74,6 +82,7 @@ class PostModel {
         listEquals(other.mentionedUsers, mentionedUsers);
   }
 
+  // Overridden hashCode() method
   @override
   int get hashCode {
     return id.hashCode ^

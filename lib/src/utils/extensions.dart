@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+// Helper extension for themeData
 extension ThemeHelper on BuildContext {
   ThemeData get theme => Theme.of(this);
 
@@ -30,7 +30,7 @@ extension ThemeHelper on BuildContext {
   TextStyle get lm => style.labelMedium!;
   TextStyle get ls => style.labelSmall!;
 }
-
+// Helper extension for list
 extension ListHelper on List {
   String toQuery() => map((e) => '"$e"').toList().toString();
 }

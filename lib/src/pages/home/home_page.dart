@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:social_app/src/core/routes.dart';
+import 'package:social_app/src/pages/auth/logout_dialog.dart';
 import 'package:social_app/src/pages/home/feed_page.dart';
 import 'package:social_app/src/pages/home/user_page.dart';
 import 'package:social_app/src/utils/app_color.dart';
@@ -19,6 +20,14 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(index == 0 ? 'News Feed' : 'Users'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                showDialog(context: context, builder: (_)=>const LogOutDialog());
+              },
+              icon: const Icon(Icons.logout),
+            ),
+          ],
         ),
         floatingActionButton: index == 0
             ? FloatingActionButton.extended(

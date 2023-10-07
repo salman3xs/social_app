@@ -15,43 +15,45 @@ class FeedPage extends ConsumerWidget {
     final posts = ref.watch(postFutureProvider);
     return Scaffold(
       body: posts.when(
-          data: (data) => SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ...data.map((e) => Card(
-                          child: Column(
-                            children: [
-                              if (e['img'] != null && e['img'] != '')
-                                Image.network(
-                                  e['img'],
-                                  fit: BoxFit.contain,
-                                  loadingBuilder: (
-                                    BuildContext c,
-                                    Widget w,
-                                    ImageChunkEvent? i,
-                                  ) {
-                                    if (i == null) {
-                                      return w;
-                                    }
-                                    return const ShimmerBox();
-                                  },
+          data: (data) => data.isEmpty
+              ? const Center(child: Text('No Posts'))
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ...data.map((e) => Card(
+                            child: Column(
+                              children: [
+                                if (e['img'] != null && e['img'] != '')
+                                  Image.network(
+                                    e['img'],
+                                    fit: BoxFit.contain,
+                                    loadingBuilder: (
+                                      BuildContext c,
+                                      Widget w,
+                                      ImageChunkEvent? i,
+                                    ) {
+                                      if (i == null) {
+                                        return w;
+                                      }
+                                      return const ShimmerBox();
+                                    },
+                                  ),
+                                ListTile(
+                                  title: Text(
+                                    e['content'],
+                                    style: context.bm,
+                                  ),
+                                  subtitle: Text(
+                                    "Created By:${e['author']['name']}",
+                                    style: context.ls,
+                                  ),
                                 ),
-                              ListTile(
-                                title: Text(
-                                  e['content'],
-                                  style: context.bm,
-                                ),
-                                subtitle: Text(
-                                  "Created By:${e['author']['name']}",
-                                  style: context.ls,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ))
-                  ],
+                              ],
+                            ),
+                          ))
+                    ],
+                  ),
                 ),
-              ),
           error: (e, s) {
             print(e.toString());
             return Text(e.toString());

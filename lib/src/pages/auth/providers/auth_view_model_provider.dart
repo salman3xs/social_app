@@ -8,16 +8,22 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:social_app/src/widgets/custom_snackbar.dart';
 
+// Provides a stream of the current user and Listen for changes to the user's authentication state
 final userStreamProvider = StreamProvider(
     (ref) => ref.read(authViewModelProvider).auth.authStateChanges());
 
+// Provides an AuthViewModel
 final authViewModelProvider =
     ChangeNotifierProvider<AuthViewModel>((ref) => AuthViewModel(ref));
 
 class AuthViewModel extends ChangeNotifier {
-  AuthViewModel(this.ref);
+  // A reference to the ProviderScope
   final Ref ref;
+  // Constructor
+  AuthViewModel(this.ref);
+  // Gets the firebase instance
   FirebaseAuth auth = FirebaseAuth.instance;
+  // Gets the current user
   User? get user => ref.watch(userStreamProvider).value;
 
   String? verificationId;
@@ -53,16 +59,18 @@ class AuthViewModel extends ChangeNotifier {
     _stream = stream;
     notifyListeners();
   }
-
+  // The streamTime() function starts a timer that counts down from 30 seconds.
   void streamTime() {
+     // Create a stream that emits an event every second.
     stream = 30;
     Timer.periodic(const Duration(seconds: 1), (v) {
+      // If the stream is still running, decrement it by 1. 
       if (stream > 0) {
         stream -= 1;
       }
     });
   }
-
+  // Method to sendOtp to the entered number
   void sendOTP({
     required VoidCallback onSend,
     required VoidCallback onComplete,
@@ -111,7 +119,7 @@ class AuthViewModel extends ChangeNotifier {
       Future.delayed(const Duration(seconds: 1), btnController.stop);
     }
   }
-
+  // Method to verify the otp entered
   Future<void> verifyOTP(
       {required VoidCallback clear, required VoidCallback onVerify}) async {
     try {
@@ -148,11 +156,11 @@ class AuthViewModel extends ChangeNotifier {
       log(e.toString());
     }
   }
-
+  // Method to signout
   Future<void> signOut() async {
     await auth.signOut();
   }
-
+  // Method to update the current user and notify all the listners
   void update() async {
     if (auth.currentUser == null) {
       user!.reload();

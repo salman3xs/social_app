@@ -41,6 +41,17 @@ class VerifyOtp extends HookConsumerWidget {
     controller.addListener(() {
       model.code = controller.text;
     });
+       // Return a Scaffold widget with the following contents:
+    //
+    // * A bottomNavigationBar with a single button that calls the verifyOTP() method on the AuthViewModel when pressed.
+    // * A body with a SingleChildScrollView that contains a Column with the following children:
+    // * A Text widget with the title "Verify OTP".
+    // * A Text widget with the subtitle "We have sent OTP to ${model.phone}".
+    // * A Pinput widget for entering the OTP.
+    // * A Row with two buttons:
+    // * A TextButton widget with the text "Edit Number" that pops the current page.
+    // * A TextButton widget with the text "Resend OTP" that calls the sendOTP() method on the AuthViewModel.
+    //
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: Padding(
@@ -54,7 +65,6 @@ class VerifyOtp extends HookConsumerWidget {
                       ? model.verifyOTP(
                           clear: controller.clear,
                           onVerify: () {
-                            // ref.invalidate(selectedPageProvider);
                             AppRoutes.pushAndRemoveUntil(page: const Root());
                           })
                       : model.btnController.stop();
@@ -69,11 +79,6 @@ class VerifyOtp extends HookConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Sizes.h100,
-              // Image.asset(
-              //   Assets.otpIcon,
-              //   scale: 4,
-              // ),
               Sizes.h36,
               Text('Verify OTP', style: context.hl),
               Sizes.h12,
@@ -127,19 +132,9 @@ class VerifyOtp extends HookConsumerWidget {
                             ? TextButton(
                                 onPressed: () {
                                   model.sendOTP(
-                                      onComplete: () {
-                                        // ref
-                                        //     .read(selectedPageProvider.notifier)
-                                        //     .state = 0;
-                                      },
+                                      onComplete: () {},
                                       onSend: () => AppRoutes.push(
-
-                                          // VerifyOtp.route
-                                          // MaterialPageRoute(
-                                          //     builder: (builder) =>
-                                          page: const VerifyOtp())
-                                      // ),
-                                      );
+                                          page: const VerifyOtp()));
                                 },
                                 child: Text(
                                   'Resend OTP',

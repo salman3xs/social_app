@@ -3,11 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import '../../firebase_options.dart';
 
-class AppConfig {
+// This class is responsible for intializing firebase
+class FireabaseConfig {
   /// Initialize any other providers
   static Future<void> init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await AppConfig.initFirebase();
+    await initFirebase();
   }
 
   /// Initialize firebase connection

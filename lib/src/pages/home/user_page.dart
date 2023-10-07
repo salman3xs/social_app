@@ -51,6 +51,7 @@ class UsersPage extends ConsumerWidget {
                                     ref.refresh(profileProvider);
                                     ref.refresh(allUsersFutureProvider);
                                     ref.refresh(profileRepositoryProvider);
+                                    ref.refresh(postRepository);
                                     ref.refresh(postFutureProvider);
                                     ref.read(loadingProvider.notifier).state =
                                         false;

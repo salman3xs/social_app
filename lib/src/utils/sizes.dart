@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+// Helper Class to create sizedbox of desired dimensions
 class Sizes {
   static const w4 = SizedBox(width: 4);
   static const w8 = SizedBox(width: 8);

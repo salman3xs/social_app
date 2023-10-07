@@ -18,7 +18,22 @@ class AddPostForm extends ConsumerWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
+    // Get the PostNotifierProvider from the dependency injection tree.
     final model = ref.watch(postNotifierProvider);
+    // Return a Scaffold widget with the following contents:
+    //
+    // * An AppBar widget with the title 'Add Post'.
+    // * A Form widget with the following fields:
+    //     * A TextFormField widget for the post content.
+    //     * An ImagePickerView widget for the post image.
+    //     * A ElevatedButton widget to mention users in the post.
+    //     * A ElevatedButton widget to add the post.
+    //
+    // The TextFormField widget will validate the post content to ensure that it is not empty.
+    // The ImagePickerView widget will allow the user to select an image for the post.
+    // The ElevatedButton widget to mention users will open a dialog where the user can select the users they want to mention in the post.
+    // The ElevatedButton widget to add the post will save the post to the database and close the form.
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Post'),
@@ -90,8 +105,20 @@ class SelectUsersDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    // Get the list of all users from the dependency injection tree.
     final users = ref.watch(allUsersFutureProvider);
+
+    // Get the PostNotifierProvider from the dependency injection tree.
     final model = ref.watch(postNotifierProvider);
+    // Return a Dialog widget with the following contents:
+    //
+    // * A Text widget with the title 'Select Users to add'.
+    // * A ListView of CheckboxListTile widgets, one for each user.
+    // * A TextButton widget with the text 'Done'.
+    //
+    // The CheckboxListTile widgets will allow the user to select the users they want to add to the post.
+    // When the user presses the 'Done' button, the selected users will be added to the post and the dialog will be closed.
     return users.when(
         data: (data) => Dialog(
               child: Column(

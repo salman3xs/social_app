@@ -13,15 +13,26 @@ final loadingProvider = StateProvider<bool>((ref) {
 });
 
 class LogOutDialog extends ConsumerWidget {
-  final bool isCreateProfile;
-  const LogOutDialog({
-    super.key,
-    this.isCreateProfile = false,
-  });
+  // Whether the logout dialog is for a user who has not yet created a profile.
 
+  // The constructor.
+  const LogOutDialog({super.key});
+
+  // The build method.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Get the loading state from the loadingProvider.
     final loading = ref.watch(loadingProvider);
+
+    // Return a Dialog widget with the following contents:
+    //
+    // * A title text that says "Logout".
+    // * A divider.
+    // * A text widget that asks the user if they are sure they want to logout.
+    // * A Row widget with two buttons:
+    //     * A Cancel button that pops the dialog.
+    //     * A Logout button that signs the user out of Firebase and pushes the Root page to the navigation stack.
+    //
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       child: Padding(
@@ -50,6 +61,7 @@ class LogOutDialog extends ConsumerWidget {
                               foregroundColor: Colors.redAccent,
                               backgroundColor: Colors.white),
                           onPressed: () {
+                            // Pop the dialog.
                             AppRoutes.pop;
                           },
                           child: const Text('Cancel'),
@@ -60,16 +72,23 @@ class LogOutDialog extends ConsumerWidget {
                         flex: 1,
                         child: ElevatedButton(
                           onPressed: () async {
+                            // Set the loading state to true.
                             ref.read(loadingProvider.notifier).state = true;
+
+                            // Sign the user out of Firebase.
                             await FirebaseAuth.instance.signOut();
+
+                            // Push the Root page to the navigation stack.
                             AppRoutes.pushAndRemoveUntil(page: const Root());
+
+                            // Set the loading state to false.
                             ref.read(loadingProvider.notifier).state = false;
                           },
                           child: const Text('Logout'),
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
           ],
         ),
       ),

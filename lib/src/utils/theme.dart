@@ -4,7 +4,7 @@ import 'paddings.dart';
 
 class Themes {
   static ThemeData get base => ThemeData.light();
-
+  // The light theme.
   static ThemeData get light => ThemeData(
         primarySwatch:
             MaterialColor(AppColors.primaryColor.value, AppColors.color),
@@ -72,9 +72,6 @@ class Themes {
                   fontSize: 12,
                 ))
             .apply(fontFamily: 'Baloo2'),
-        // checkboxTheme: CheckboxThemeData(
-        //   checkColor: MaterialStateProperty.all(value)
-        // ),
         checkboxTheme: CheckboxThemeData(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),

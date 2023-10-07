@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+// Helper Class to create paddings of desired dimensions
 class Paddings {
   static const  p2 = EdgeInsets.all(0);
   static const  p4 = EdgeInsets.all(2);
@@ -20,7 +20,7 @@ class Paddings {
   static const  p52 = EdgeInsets.all(52);
   static const  p56 = EdgeInsets.all(56);
 }
-
+// Helper Extension to create paddings of desired dimensions
 extension Symmetric on EdgeInsets {
   EdgeInsets get horizontally {
     return EdgeInsets.symmetric(horizontal: left);

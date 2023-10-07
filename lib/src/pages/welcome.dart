@@ -6,13 +6,9 @@ import '../utils/app_color.dart';
 import '../utils/paddings.dart';
 import '../utils/sizes.dart';
 import 'auth/login_page.dart';
-class WelcomeScreen extends StatefulWidget {
+class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
-  @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
-}
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
